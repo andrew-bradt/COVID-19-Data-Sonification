@@ -12,5 +12,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { getFirebaseConfig } from './firebase-config.js';
+
 const firebaseAppConfig = getFirebaseConfig();
 initializeApp(firebaseAppConfig);
+
