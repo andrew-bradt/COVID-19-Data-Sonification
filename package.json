@@ -1,0 +1,24 @@
+{
+  "name": "COVID-19-Data-Sonification",
+  "version": "1.0.0",
+  "description": "Firebase application which fetches COVID-19 statistics in order to trigger the playback of various audio files.",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack --watch --progress",
+    "visualize-bundle": "webpack --analyze"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "supertest": "^6.1.6",
+    "webpack": "^5.48.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "firebase": "^9.4.1",
+    "tone": "^14.7.77"
+  }
+}
