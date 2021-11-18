@@ -2,8 +2,6 @@
 - fetchCovidData retrieves COVID-19 statistics from https://api.opencovid.ca
 - Returns an object with yesterday's statistics for the stat provided in the stat parameter
 - loc should be a province or canada wise, defaults to canada if no argument provided
-- DD_MM_YYYY should be formatted as DD-MM-YYYY.  If not provided, defaults to yesterday.
-- DD_MM_YYYY converts to a time in milliseconds, in UTC-8
 */
 const axios = require('axios');
 
