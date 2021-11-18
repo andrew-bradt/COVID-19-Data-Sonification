@@ -30,3 +30,4 @@ test(`makeIntervals/DAY_IN_MS should be >= 0.99`,()=>{
     const expected = makeIntervals(CASES).reduce((a,b)=>a+b)/DAY_IN_MS;
     expect(expected).toBeGreaterThanOrEqual(tolerance);
 });
+
