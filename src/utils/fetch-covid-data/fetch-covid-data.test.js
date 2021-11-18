@@ -1,9 +1,9 @@
 const fetchCovidData = require('./fetch-covid-data');
 
 test('Should Retrieve Yesterdays Active Cases for Canada',()=>{
-    return fetchCovidData('active').then(data=>{
+    return fetchCovidData('cases').then(data=>{
         expect(data).toEqual(expect.objectContaining({
-            active_cases:expect.any(Number)
+            cases:expect.any(Number)
         }));
     });
 });

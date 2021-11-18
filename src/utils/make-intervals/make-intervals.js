@@ -6,15 +6,25 @@ const makeIntervals = (dailyCount, offsetPercent=0.25)=>{
     const minIntervalMs = avgInterval * minIntervalPercent;
     const maxIntervalMs = avgInterval * maxIntervalPercent;
     const offsetIntervalMs = maxIntervalMs - minIntervalMs;
-
     const convertPercentToMs = (x, min, offset)=>x*offset+min;
-
+    const shuffledArray = (array)=>{
+        const length = array.length;
+        let i = length-1;
+        while (i !== 0){
+            const randomIndex = Math.floor(Math.random()*i);
+            const temp = array[i];
+            array[i]=array[randomIndex];
+            array[randomIndex]=temp;
+            i--;
+        }
+        return array;
+    };
     const intervalsArrayPercentage = [];
     for (let i = 0; i < dailyCount; i++){
         const interval = convertPercentToMs(i/dailyCount, minIntervalMs, offsetIntervalMs);
         intervalsArrayPercentage.push(interval);
     }
-    return intervalsArrayPercentage;
+    return shuffledArray(intervalsArrayPercentage);
 };
 
 module.exports = makeIntervals;
