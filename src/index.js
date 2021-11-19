@@ -7,6 +7,7 @@ NODE_MODULES
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc} from 'firebase/firestore';
 import { getFirebaseConfig } from './firebase-config.js';
+import * as Tone from 'tone';
 /*
 ************************************************************************************************
 CUSTOM MODULES
