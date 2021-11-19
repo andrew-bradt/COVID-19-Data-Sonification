@@ -1,5 +1,5 @@
-const fetchCovidData = require('./fetch-covid-data');
-const msToDDMMYYYY = require('../ms-to-ddmmyyyy/ms-to-ddmmyyyy');
+import {fetchCovidData} from './fetch-covid-data';
+import {msToDDMMYYYY} from '../ms-to-ddmmyyyy/ms-to-ddmmyyyy';
 
 test('Should Retrieve Yesterdays Active Cases for Canada',()=>{
     return fetchCovidData('cases').then(data=>{

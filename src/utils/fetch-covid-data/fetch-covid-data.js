@@ -3,19 +3,21 @@
 - Returns an object with yesterday's statistics for the stat provided in the stat parameter
 - loc should be a province or canada wise, defaults to canada if no argument provided
 */
-const axios = require('axios');
+import axios from 'axios';
 
-const fetchCovidData = async(stat, DD_MM_YYYY, loc='canada')=>{
-    const res = await axios({
-        method:'get',
-        url:'https://api.opencovid.ca/timeseries',
-        params:{
-            stat,
-            loc,
-            date:DD_MM_YYYY
-        }
-    });
-    return res.data[stat][0];
+export async function fetchCovidData(stat, DD_MM_YYYY, loc='canada'){
+    try {
+        const res = await axios({
+            method:'get',
+            url:'https://api.opencovid.ca/timeseries',
+            params:{
+                stat,
+                loc,
+                date:DD_MM_YYYY
+            }
+        });
+        return res.data[stat][0];
+    } catch (err){
+        console.error('Error fetching data from Opencovid.ca:',err);
+    }
 };
-
-module.exports = fetchCovidData;

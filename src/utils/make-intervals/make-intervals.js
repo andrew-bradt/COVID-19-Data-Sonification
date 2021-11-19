@@ -1,4 +1,5 @@
-const makeIntervals = (dailyCount, offsetPercent=0.25)=>{
+export function makeIntervals (dailyCount, offsetPercent){
+    offsetPercent = offsetPercent || 0.25;
     const DAY_IN_MS = 24*60*60*1000;
     const avgInterval = DAY_IN_MS/dailyCount;
     const minIntervalPercent = 1 - offsetPercent;
@@ -26,5 +27,3 @@ const makeIntervals = (dailyCount, offsetPercent=0.25)=>{
     }
     return shuffledArray(intervalsArrayPercentage);
 };
-
-module.exports = makeIntervals;

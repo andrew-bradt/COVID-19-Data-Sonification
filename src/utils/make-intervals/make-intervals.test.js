@@ -1,8 +1,8 @@
-const makeIntervals = require('./make-intervals');
+import {makeIntervals} from './make-intervals';
+import {ONE_DAY_MS} from '../../constants/constants';
 
 const CASES = 3000;
-const DAY_IN_MS = 24*60*60*1000;
-const AVG_INTERVAL = DAY_IN_MS/CASES;
+const AVG_INTERVAL = ONE_DAY_MS/CASES;
 const OFFSET_PERCENT = 0.25;
 const MIN_INTERVAL_PERCENT = 1 - OFFSET_PERCENT;
 const MAX_INTERVAL_PERCENT = 1 + OFFSET_PERCENT;
@@ -25,9 +25,9 @@ test(`Intervals should be <= ${MAX_INTERVAL_MS}`,()=>{
     });
 });
 
-test(`makeIntervals/DAY_IN_MS should be >= 0.99`,()=>{
-    const tolerance = DAY_IN_MS*0.99/DAY_IN_MS;
-    const expected = makeIntervals(CASES).reduce((a,b)=>a+b)/DAY_IN_MS;
+test(`makeIntervals/ONE_DAY_MS should be >= 0.99`,()=>{
+    const tolerance = ONE_DAY_MS*0.99/ONE_DAY_MS;
+    const expected = makeIntervals(CASES).reduce((a,b)=>a+b)/ONE_DAY_MS;
     expect(expected).toBeGreaterThanOrEqual(tolerance);
 });
 
