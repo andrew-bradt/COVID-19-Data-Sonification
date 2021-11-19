@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "friendly-chat-27fd4"
-  },
-  "targets": {}
+    "default": "covid-19-data-sonification"
+  }
 }
