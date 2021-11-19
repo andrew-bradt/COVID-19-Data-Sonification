@@ -1,20 +1,17 @@
 'use strict';
+/*
+************************************************************************************************
+NODE_MODULES
+************************************************************************************************
+*/
 import { initializeApp } from 'firebase/app';
-import {
-  getFirestore,
-  addDoc,
-  getDoc,
-  query,
-  updateDoc,
-  runTransaction,
-  doc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { getFirestore, doc} from 'firebase/firestore';
 import { getFirebaseConfig } from './firebase-config.js';
-
-const firebaseAppConfig = getFirebaseConfig();
-initializeApp(firebaseAppConfig);
-export const db = getFirestore();
+/*
+************************************************************************************************
+CUSTOM MODULES
+************************************************************************************************
+*/
 // Constants
 import {ONE_DAY_MS, YESTERDAY_MS,} from './constants/constants';
 // Utils
@@ -24,6 +21,14 @@ import {fetchCovidData} from './utils/fetch-covid-data/fetch-covid-data';
 import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when-last-updated';
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
+/*
+************************************************************************************************
+MISC
+************************************************************************************************
+*/
+const firebaseAppConfig = getFirebaseConfig();
+initializeApp(firebaseAppConfig);
+export const db = getFirestore();
 
 async function readOrWriteIntervals(){
   const lastUpdateDocRef = doc(db, 'lastUpdate','date');
@@ -39,6 +44,7 @@ async function readOrWriteIntervals(){
     };
   }
 };
+
 readOrWriteIntervals();
 
 
