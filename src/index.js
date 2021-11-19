@@ -7,7 +7,7 @@ NODE_MODULES
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc} from 'firebase/firestore';
 import { getFirebaseConfig } from './firebase-config.js';
-import * as Tone from 'tone';
+import {start} from 'tone';
 /*
 ************************************************************************************************
 CUSTOM MODULES
@@ -22,9 +22,11 @@ import {fetchCovidData} from './utils/fetch-covid-data/fetch-covid-data';
 import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when-last-updated';
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
+// Tone Functions
+
 /*
 ************************************************************************************************
-MISC
+FUNCTIONS & VARIABLES
 ************************************************************************************************
 */
 const firebaseAppConfig = getFirebaseConfig();
@@ -45,8 +47,12 @@ async function readOrWriteIntervals(){
     };
   }
 };
-
 readOrWriteIntervals();
+/*
+************************************************************************************************
+DOM ELEMENTS & EVENT LISTENERS
+************************************************************************************************
+*/
+const startButton = document.querySelector('#start-tone');
 
-
-
+startButton.addEventListener('click',async()=>await start());
