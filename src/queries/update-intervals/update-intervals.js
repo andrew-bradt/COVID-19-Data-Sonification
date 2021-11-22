@@ -24,6 +24,7 @@ export async function updateIntervals(dailyCount, lastUpdateDocRef, arrayDocRef,
             await updateDoc(lastUpdateDocRef,{timestamp:serverTimestamp()});
             transaction.update(arrayDocRef,{array:intervals});
         });
+        return intervals;
     } catch (err){
         console.error('Error with Transaction',err);
     }

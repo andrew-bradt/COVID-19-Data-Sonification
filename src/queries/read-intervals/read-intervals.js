@@ -19,7 +19,8 @@ FUNCTION DECLARATION
 export async function readIntervals(intervalsDocRef){
     try {
         const docSnap = await getDoc(intervalsDocRef);
-        return docSnap.data().array;
+        const intervals = await docSnap.data().array;
+        return intervals;
     } catch(err){
         console.error('Error reading Intervals',err);
     };

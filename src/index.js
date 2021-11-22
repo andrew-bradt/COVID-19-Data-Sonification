@@ -37,13 +37,14 @@ async function readOrWriteIntervals(){
   const lastUpdateDocRef = doc(db, 'lastUpdate','date');
   const casesDocRef = doc(db,'cases','intervals');
   const isLastUpdateRecent = await checkWhenLastUpdated(lastUpdateDocRef);
+  let intervals;
   if(isLastUpdateRecent){
-    const intervals = await readIntervals(casesDocRef);
+    intervals = await readIntervals(casesDocRef);
   } else {
     const dataDate = msToDDMMYYYY(YESTERDAY_MS);
     const covidData = await fetchCovidData('cases',dataDate);
     if(covidData){
-      return updateIntervals(covidData.cases,lastUpdateDocRef,casesDocRef);
+      intervals = await updateIntervals(covidData.cases,lastUpdateDocRef,casesDocRef);
     };
   }
 };
