@@ -23,7 +23,6 @@ import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
 // Tone Functions
-
 /*
 ************************************************************************************************
 FUNCTIONS & VARIABLES
