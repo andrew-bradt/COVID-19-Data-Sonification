@@ -7,7 +7,7 @@ NODE_MODULES
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc} from 'firebase/firestore';
 import { getFirebaseConfig } from './firebase-config.js';
-import {start} from 'tone';
+import * as Tone from 'tone';
 /*
 ************************************************************************************************
 CUSTOM MODULES
@@ -23,6 +23,7 @@ import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
 // Tone Functions
+import {scheduleTransport} from './tone/schedule-transport/schedule-transport';
 /*
 ************************************************************************************************
 FUNCTIONS & VARIABLES
@@ -46,12 +47,10 @@ async function readOrWriteIntervals(){
       intervals = await updateIntervals(covidData.cases,lastUpdateDocRef,casesDocRef);
     };
   }
-  return intervals;
+  return scheduleTransport(intervals);
 };
-(async()=>{
-  const intervals = await readOrWriteIntervals();
-  console.log(intervals);
-})();
+
+readOrWriteIntervals();
 /*
 ************************************************************************************************
 DOM ELEMENTS & EVENT LISTENERS
@@ -59,4 +58,7 @@ DOM ELEMENTS & EVENT LISTENERS
 */
 const startButton = document.querySelector('#start-tone');
 
-startButton.addEventListener('click',async()=>await start());
+startButton.addEventListener('click',async()=>{
+  await Tone.start();
+  Tone.Transport.start();
+});

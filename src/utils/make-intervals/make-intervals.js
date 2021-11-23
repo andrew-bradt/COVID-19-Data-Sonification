@@ -1,7 +1,8 @@
+import {ONE_DAY_S} from '../../constants/constants';
+
 export function makeIntervals (dailyCount, offsetPercent){
     offsetPercent = offsetPercent || 0.25;
-    const DAY_IN_S = 24*60*60;
-    const avgInterval = DAY_IN_S/dailyCount;
+    const avgInterval = ONE_DAY_S/dailyCount;
     const minIntervalPercent = 1 - offsetPercent;
     const maxIntervalPercent = 1 + offsetPercent;
     const minIntervalMs = avgInterval * minIntervalPercent;
