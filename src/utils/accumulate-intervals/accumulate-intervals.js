@@ -1,9 +1,9 @@
 export function accumulateIntervals(intervalsArray){
     const accumulatedArray = [0];
+    let acc = 0;
     for (let i = 0; i < intervalsArray.length; i++){
-        const previousVal = accumulatedArray[i];
-        const currentVal = intervalsArray[i];
-        accumulatedArray.push(previousVal + currentVal);
+        acc+=intervalsArray[i];
+        accumulatedArray.push(acc);
     }
     return accumulatedArray;
 };

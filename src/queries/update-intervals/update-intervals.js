@@ -21,7 +21,6 @@ FUNCTION DECLARATION
 export async function updateIntervals(dailyCount, lastUpdateDocRef, arrayDocRef, offsetPercent){
     const intervals = makeIntervals(dailyCount-1, offsetPercent);
     const accumulatedIntervals = accumulateIntervals(intervals);
-    console.log(accumulatedIntervals);
     try {
         await runTransaction(db,async(transaction)=>{
             await updateDoc(lastUpdateDocRef,{timestamp:serverTimestamp()});

@@ -46,8 +46,12 @@ async function readOrWriteIntervals(){
       intervals = await updateIntervals(covidData.cases,lastUpdateDocRef,casesDocRef);
     };
   }
+  return intervals;
 };
-readOrWriteIntervals();
+(async()=>{
+  const intervals = await readOrWriteIntervals();
+  console.log(intervals);
+})();
 /*
 ************************************************************************************************
 DOM ELEMENTS & EVENT LISTENERS

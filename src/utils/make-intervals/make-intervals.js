@@ -1,13 +1,13 @@
 export function makeIntervals (dailyCount, offsetPercent){
     offsetPercent = offsetPercent || 0.25;
-    const DAY_IN_MS = 24*60*60*1000;
-    const avgInterval = DAY_IN_MS/dailyCount;
+    const DAY_IN_S = 24*60*60;
+    const avgInterval = DAY_IN_S/dailyCount;
     const minIntervalPercent = 1 - offsetPercent;
     const maxIntervalPercent = 1 + offsetPercent;
     const minIntervalMs = avgInterval * minIntervalPercent;
     const maxIntervalMs = avgInterval * maxIntervalPercent;
     const offsetIntervalMs = maxIntervalMs - minIntervalMs;
-    const convertPercentToMs = (x, min, offset)=>x*offset+min;
+    const convertPercentToS = (x, min, offset)=>x*offset+min;
     const shuffledArray = (array)=>{
         const length = array.length;
         let i = length-1;
@@ -22,7 +22,7 @@ export function makeIntervals (dailyCount, offsetPercent){
     };
     const intervalsArrayPercentage = [];
     for (let i = 0; i < dailyCount; i++){
-        const interval = convertPercentToMs(i/dailyCount, minIntervalMs, offsetIntervalMs);
+        const interval = convertPercentToS(i/dailyCount, minIntervalMs, offsetIntervalMs);
         intervalsArrayPercentage.push(interval);
     }
     return shuffledArray(intervalsArrayPercentage);
