@@ -11,6 +11,7 @@ CUSTOM_MODULES
 */
 import {db} from '../../index';
 import {makeIntervals} from '../../utils/make-intervals/make-intervals';
+import { accumulateIntervals } from '../../utils/accumulate-intervals/accumulate-intervals';
 /*
 ************************************************************************************************
 FUNCTION DECLARATION
@@ -18,13 +19,15 @@ FUNCTION DECLARATION
 ************************************************************************************************
 */
 export async function updateIntervals(dailyCount, lastUpdateDocRef, arrayDocRef, offsetPercent){
-    const intervals = makeIntervals(dailyCount, offsetPercent);
+    const intervals = makeIntervals(dailyCount-1, offsetPercent);
+    const accumulatedIntervals = accumulateIntervals(intervals);
+    console.log(accumulatedIntervals);
     try {
         await runTransaction(db,async(transaction)=>{
             await updateDoc(lastUpdateDocRef,{timestamp:serverTimestamp()});
-            transaction.update(arrayDocRef,{array:intervals});
+            transaction.update(arrayDocRef,{array:accumulatedIntervals});
         });
-        return intervals;
+        return accumulatedIntervals;
     } catch (err){
         console.error('Error with Transaction',err);
     }
