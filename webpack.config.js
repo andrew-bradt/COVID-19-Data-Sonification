@@ -4,9 +4,10 @@ const webpack = require('webpack');
 
 const audioFileList = (()=>{
   const fileList = fs.readdirSync(path.join(__dirname,'public','audio'));
-  const fileListWithPath = fileList.map(fileName=>`${__dirname}/${fileName}`);
+  const fileListWithPath = fileList.map(fileName=>`./audio/${fileName}`);
   return JSON.stringify(fileListWithPath);
 })();
+
 const rootConfig = {
   mode: 'development',
   optimization: {

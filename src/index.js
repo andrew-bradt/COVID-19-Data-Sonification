@@ -23,7 +23,7 @@ import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
 // Tone Functions
-import {scheduleTransport} from './tone/schedule-transport/schedule-transport';
+import {scheduleTransport, generatePlayers} from './tone/schedule-transport/schedule-transport';
 /*
 ************************************************************************************************
 FUNCTIONS & VARIABLES
@@ -47,10 +47,9 @@ async function readOrWriteIntervals(){
       intervals = await updateIntervals(covidData.cases,lastUpdateDocRef,casesDocRef);
     };
   }
-  return scheduleTransport(intervals);
+  return intervals;
 };
 
-readOrWriteIntervals();
 /*
 ************************************************************************************************
 DOM ELEMENTS & EVENT LISTENERS
@@ -62,3 +61,10 @@ startButton.addEventListener('click',async()=>{
   await Tone.start();
   Tone.Transport.start();
 });
+
+(async()=>{
+  const output = new Tone.Gain(0.2).toDestination();
+  const intervals = await (readOrWriteIntervals());
+  const sampler = generatePlayers(__FILELIST__,output);
+  scheduleTransport(intervals,sampler);
+})();
