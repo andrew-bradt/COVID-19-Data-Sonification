@@ -20,4 +20,7 @@ export function scheduleTransport(intervalsArray){
             console.log(interval);
         },interval);
     });
+    console.log(__FILELIST__);
 };
+
+
