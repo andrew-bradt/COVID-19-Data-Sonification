@@ -9,7 +9,7 @@ import {updateDoc, runTransaction, serverTimestamp} from 'firebase/firestore';
 CUSTOM_MODULES
 ************************************************************************************************
 */
-import {db} from '../../index';
+import {db} from '../../firebase-config';
 import {makeIntervals} from '../../utils/make-intervals/make-intervals';
 import { accumulateIntervals } from '../../utils/accumulate-intervals/accumulate-intervals';
 /*
