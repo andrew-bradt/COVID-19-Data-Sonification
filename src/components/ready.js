@@ -8,7 +8,7 @@ const start = ()=>{
 export default function Ready() {
     return (
         <div>
-            <button onClick={()=>start()}>Start Audio</button>
+            <button onClick={start}>Start Audio</button>
         </div>
     )
 }

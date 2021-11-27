@@ -23,7 +23,7 @@ import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
 // Tone Functions
-import {scheduleTransport, generatePlayers} from './tone/schedule-transport/schedule-transport';
+import {scheduleTransport, generateSamplers} from './tone/schedule-transport/schedule-transport';
 /*
 ************************************************************************************************
 COMPONENT IMPORTS
@@ -41,6 +41,7 @@ const output = new Tone.Gain(0.2).toDestination();
 function App() {
   const [intervalsState, setIntervalsState] = useState(null);
   const [isToneReady, setIsToneReady] = useState(false);
+
   useEffect(()=>{
     (async()=>{
       const lastUpdateDocRef = doc(db, 'lastUpdate','date');
@@ -61,7 +62,7 @@ function App() {
   },[]);
   useEffect(()=>{
     if(intervalsState){
-      const sampler = generatePlayers(process.env.AUDIO_PATHS,output);
+      const sampler = generateSamplers(process.env.AUDIO_PATHS,output);
       scheduleTransport(intervalsState,sampler);
       setIsToneReady(true);
     }
