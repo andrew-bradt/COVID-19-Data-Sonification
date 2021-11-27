@@ -1,7 +1,14 @@
+import * as Tone from 'tone';
+
+const start = ()=>{
+    Tone.start();
+    Tone.Transport.start();
+};
+
 export default function Ready() {
     return (
         <div>
-            Ready
+            <button onClick={()=>start()}>Start Audio</button>
         </div>
     )
 }
