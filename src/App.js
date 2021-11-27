@@ -14,7 +14,7 @@ CUSTOM MODULES
 // Firebase Config
 import {db} from './firebase-config';
 // // Constants
-import {ONE_DAY_MS, YESTERDAY_MS,} from './constants/constants';
+import {YESTERDAY_MS,} from './constants/constants';
 // Utils
 import {msToDDMMYYYY} from './utils/ms-to-ddmmyyyy/ms-to-ddmmyyyy';
 import {fetchCovidData} from './utils/fetch-covid-data/fetch-covid-data';

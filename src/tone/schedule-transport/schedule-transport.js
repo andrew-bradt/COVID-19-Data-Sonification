@@ -3,8 +3,7 @@
 NODE MODULES
 ************************************************************************************************
 */
-import {Transport, Players, Player} from 'tone';
-import * as Tone from 'tone';
+import {Transport, Player} from 'tone';
 /*
 ************************************************************************************************
 CUSTOM MODULES

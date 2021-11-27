@@ -12,7 +12,6 @@ CUSTOM MODULES
 import {
   ONE_DAY_MS,
   YESTERDAY_MS,
-  MINUS_EIGHT_HOURS,
 } from '../../constants/constants';
 /*
 ************************************************************************************************
