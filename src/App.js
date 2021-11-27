@@ -26,11 +26,20 @@ import {updateIntervals} from './queries/update-intervals/update-intervals';
 import {scheduleTransport, generatePlayers} from './tone/schedule-transport/schedule-transport';
 /*
 ************************************************************************************************
+COMPONENT IMPORTS
+************************************************************************************************
+*/
+import Ready from './components/ready';
+import NotReady from './components/not-ready';
+/*
+************************************************************************************************
 FUNCTIONS & VARIABLES
 ************************************************************************************************
 */
+const output = new Tone.Gain(0.2).toDestination();
+
 function App() {
-  const [intervals, setIntervals] = useState(null);
+  const [intervalsState, setIntervalsState] = useState(null);
   const [isToneReady, setIsToneReady] = useState(false);
   useEffect(()=>{
     (async()=>{
@@ -47,11 +56,22 @@ function App() {
           intervals = await updateIntervals(covidData.cases,lastUpdateDocRef,casesDocRef);
         };
       }
-      return setIntervals(intervals);
+      return setIntervalsState(intervals);
     })();
-  });
+  },[]);
+  useEffect(()=>{
+    if(intervalsState){
+      const sampler = generatePlayers(process.env.AUDIO_PATHS,output);
+      scheduleTransport(intervalsState,sampler);
+      setIsToneReady(true);
+    }
+  },[intervalsState]);
+  
   return (
     <div className="App">
+      {
+        isToneReady ? <Ready/> : <NotReady/>
+      }
     </div>
   );
 }
