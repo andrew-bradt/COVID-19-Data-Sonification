@@ -40,6 +40,7 @@ const audioDir = ()=>{
 const audioPath = (directory)=>{
   const fileList = fs.readdirSync(directory);
   const relPath = fileList.map(fileName=>`./audio/${fileName}`);
+  relPath.shift();
   return JSON.stringify(relPath);
 };
 

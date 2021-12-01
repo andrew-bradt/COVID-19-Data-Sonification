@@ -23,7 +23,7 @@ import {checkWhenLastUpdated} from './queries/check-when-last-updated/check-when
 import {readIntervals} from './queries/read-intervals/read-intervals';
 import {updateIntervals} from './queries/update-intervals/update-intervals';
 // Tone Functions
-import {scheduleTransport, generateSamplers} from './tone/schedule-transport/schedule-transport';
+import {loadBuffers, scheduleTransport, generateSamplers} from './tone/schedule-transport/schedule-transport';
 /*
 ************************************************************************************************
 COMPONENT IMPORTS
@@ -40,6 +40,7 @@ const output = new Tone.Gain(0.2).toDestination();
 
 function App() {
   const [intervalsState, setIntervalsState] = useState(null);
+  const [buffers, setBuffers] = useState(null);
   const [isToneReady, setIsToneReady] = useState(false);
 
   useEffect(()=>{
@@ -62,12 +63,16 @@ function App() {
   },[]);
   useEffect(()=>{
     if(intervalsState){
-      const sampler = generateSamplers(process.env.AUDIO_PATHS,output);
-      scheduleTransport(intervalsState,sampler);
-      setIsToneReady(true);
+      loadBuffers(process.env.AUDIO_PATHS, setBuffers);
     }
   },[intervalsState]);
-  
+  useEffect(()=>{
+    if(buffers && intervalsState){
+      const samplers = generateSamplers(buffers,output);
+      scheduleTransport(intervalsState,samplers);
+      setIsToneReady(true);
+    }
+  },[buffers, intervalsState]);
   return (
     <div className="App">
       {
@@ -76,5 +81,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

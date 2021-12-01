@@ -3,7 +3,7 @@
 NODE MODULES
 ************************************************************************************************
 */
-import {Transport, Player, Channel} from 'tone';
+import {Transport, Player, Channel, ToneAudioBuffers} from 'tone';
 /*
 ************************************************************************************************
 CUSTOM MODULES
@@ -14,15 +14,27 @@ CUSTOM MODULES
 EXPORT FUNCTIONS
 ************************************************************************************************
 */
-export const generateSamplers = (audioPaths, output)=>{
-    const samplerArray = audioPaths.map(file=>{
-        const player = new Player(file);
-        const channel = new Channel(1,0);
+
+export const loadBuffers = (fileNames, callback)=>{
+    const buffers = new ToneAudioBuffers({
+        urls:{...fileNames},
+        onload:()=>{
+            callback(buffers);
+        }
+    });
+};
+
+export const generateSamplers = (buffers, output)=>{
+    const numBuffers = buffers._buffers.size;
+    const samplers = [];
+    for (let i = 0; i < numBuffers; i++){
+        const player = new Player(buffers.get(i));
+        const channel = new Channel(1, 0);
         player.connect(channel);
         channel.connect(output);
-        return {player, channel};
-    });
-    return samplerArray;
+        samplers.push({player, channel});
+    };
+    return samplers;
 };
 
 export const scheduleTransport=(intervalsArray, samplers)=>{
