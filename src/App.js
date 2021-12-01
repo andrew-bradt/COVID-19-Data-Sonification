@@ -6,6 +6,8 @@ NODE_MODULES
 import {useEffect, useState} from 'react';
 import {doc} from 'firebase/firestore';
 import * as Tone from 'tone';
+import {Grid} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
 /*
 ************************************************************************************************
 CUSTOM MODULES
@@ -38,7 +40,15 @@ FUNCTIONS & VARIABLES
 */
 const output = new Tone.Gain(0.2).toDestination();
 
+const useStyles = makeStyles(theme=>({
+  container:{
+    width:'100vw',
+    height:'100vh'
+  }
+}));
+
 function App() {
+  const classes = useStyles();
   const [intervalsState, setIntervalsState] = useState(null);
   const [buffers, setBuffers] = useState(null);
   const [isToneReady, setIsToneReady] = useState(false);
@@ -61,11 +71,13 @@ function App() {
       return setIntervalsState(intervals);
     })();
   },[]);
+
   useEffect(()=>{
     if(intervalsState){
       loadBuffers(process.env.AUDIO_PATHS, setBuffers);
     }
   },[intervalsState]);
+
   useEffect(()=>{
     if(buffers && intervalsState){
       const samplers = generateSamplers(buffers,output);
@@ -75,12 +87,18 @@ function App() {
   },[buffers, intervalsState]);
   return (
     <div className="App">
-      {
-        isToneReady ? <Ready/> : <NotReady/>
-      }
+      <Grid
+        container
+        justifyContent='center'
+        alignContent='center'
+        className={classes.container}
+      >
+        {
+          isToneReady ? <Ready/> : <NotReady/>
+        }
+      </Grid>
     </div>
   );
 }
-
 
 export default App;
