@@ -42,7 +42,8 @@ const output = new Tone.Gain(0.2).toDestination();
 
 const useStyles = makeStyles(theme=>({
   container:{
-    width:'100vw',
+    marginLeft:'15vw',
+    width:'70vw',
     height:'100vh'
   }
 }));

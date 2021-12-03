@@ -1,0 +1,7 @@
+{
+  "name": "COVID-19 Data Sonification",
+  "short_name": "COVID-19 Data Sonification",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait"
+}
