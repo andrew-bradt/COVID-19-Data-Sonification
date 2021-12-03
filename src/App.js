@@ -38,7 +38,7 @@ import NotReady from './components/not-ready';
 FUNCTIONS & VARIABLES
 ************************************************************************************************
 */
-const output = new Tone.Gain(0.2).toDestination();
+const output = new Tone.Gain().toDestination();
 
 const useStyles = makeStyles(theme=>({
   container:{
@@ -53,6 +53,11 @@ function App() {
   const [intervalsState, setIntervalsState] = useState(null);
   const [buffers, setBuffers] = useState(null);
   const [isToneReady, setIsToneReady] = useState(false);
+  const [volume, setVolume] = useState(0.8);
+
+  const changeVolume = (vol)=>{
+    setVolume(vol);
+  };
 
   useEffect(()=>{
     (async()=>{
@@ -86,6 +91,10 @@ function App() {
       setIsToneReady(true);
     }
   },[buffers, intervalsState]);
+
+  useEffect(()=>{
+    
+  },[volume]);
   return (
     <div className="App">
       <Grid
@@ -95,7 +104,7 @@ function App() {
         className={classes.container}
       >
         {
-          isToneReady ? <Ready/> : <NotReady/>
+          isToneReady ? <Ready changeVolume={changeVolume}/> : <NotReady/>
         }
       </Grid>
     </div>

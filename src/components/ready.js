@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 // Material UI
 import {
     Button,
@@ -8,20 +8,28 @@ import {
 } from '@material-ui/core';
 import Muted from '@material-ui/icons/VolumeMute';
 import NotMuted from '@material-ui/icons/VolumeUp';
+
 const start = ()=>{
     Tone.start();
     Tone.Transport.start();
 };
 
-export default function Ready({volume, changeVolume}) {
+export default function Ready({changeVolume}) {
     const [isPlaying,setIsPlaying] = useState(false);
-    const [prevVolume, setPrevVolume]=useState(false);
+    const [prevVolume, setPrevVolume] = useState(0.8);
+    const [volCache, setVolCache] = useState(prevVolume);
     const handleChange = (e,val)=>{
-        if (val !== prevVolume){
-            setPrevVolume(val);
-            changeVolume(val);
+        setPrevVolume(val);
+    };
+
+    const toggleMute = (toggleState)=>{
+        if(toggleState === 'off'){
+            setVolCache(prevVolume);
+            setPrevVolume(0);
+        } else if (toggleState === 'on'){
+            setPrevVolume(volCache);
         }
-    }
+    };
     return (
         <>
             <Typography
@@ -48,10 +56,17 @@ export default function Ready({volume, changeVolume}) {
                 min={0}
                 max={1}
                 step={0.0001}
+                value = {prevVolume}
                 onChange = {(e, val)=>handleChange(e,val)}
             />
             {
-                (prevVolume) ? <NotMuted/> : <Muted/>
+                (prevVolume) 
+                ? <NotMuted
+                    onClick={()=>toggleMute('off')}
+                /> 
+                : <Muted
+                    onClick={()=>toggleMute('on')}
+                />
             }
         </>
     )
