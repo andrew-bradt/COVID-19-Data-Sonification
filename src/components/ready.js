@@ -32,7 +32,7 @@ export default function Ready({volume, changeVolume}) {
                 COVID-19 Data Sonification
             </Typography>
             <Typography
-                variant='p'
+                variant='body1'
                 align='center'
             >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Molestie at elementum eu facilisis sed odio. Vel eros donec ac odio tempor orci dapibus ultrices in. Sollicitudin ac orci phasellus egestas. Lacus sed turpis tincidunt id aliquet risus. In eu mi bibendum neque. Viverra nibh cras pulvinar mattis. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Id volutpat lacus laoreet non curabitur gravida arcu ac tortor. Et magnis dis parturient montes nascetur. Malesuada fames ac turpis egestas integer eget. Erat pellentesque adipiscing commodo elit at imperdiet dui. Augue ut lectus arcu bibendum. Ultrices tincidunt arcu non sodales neque sodales ut etiam sit. Blandit turpis cursus in hac habitasse. Ac odio tempor orci dapibus ultrices in iaculis.
