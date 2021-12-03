@@ -38,8 +38,6 @@ import NotReady from './components/not-ready';
 FUNCTIONS & VARIABLES
 ************************************************************************************************
 */
-const output = new Tone.Gain().toDestination();
-
 const useStyles = makeStyles(theme=>({
   container:{
     marginLeft:'15vw',
@@ -49,14 +47,14 @@ const useStyles = makeStyles(theme=>({
 }));
 
 function App() {
+  const output = new Tone.Volume().toDestination();
   const classes = useStyles();
   const [intervalsState, setIntervalsState] = useState(null);
   const [buffers, setBuffers] = useState(null);
   const [isToneReady, setIsToneReady] = useState(false);
-  const [volume, setVolume] = useState(0.8);
-
+  // const [volume, setVolume] = useState(0);
   const changeVolume = (vol)=>{
-    setVolume(vol);
+    output.volume.rampTo(vol, 0.01);
   };
 
   useEffect(()=>{
@@ -92,9 +90,10 @@ function App() {
     }
   },[buffers, intervalsState]);
 
-  useEffect(()=>{
-    
-  },[volume]);
+  // useEffect(()=>{
+  //   output.gain.rampTo(volume, 0.01);
+  // },[volume]);
+
   return (
     <div className="App">
       <Grid

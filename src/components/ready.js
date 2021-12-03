@@ -15,21 +15,24 @@ const start = ()=>{
 };
 
 export default function Ready({changeVolume}) {
-    const [isPlaying,setIsPlaying] = useState(false);
     const [prevVolume, setPrevVolume] = useState(0.8);
     const [volCache, setVolCache] = useState(prevVolume);
+    
     const handleChange = (e,val)=>{
         setPrevVolume(val);
+        changeVolume(val);
     };
-
     const toggleMute = (toggleState)=>{
         if(toggleState === 'off'){
             setVolCache(prevVolume);
             setPrevVolume(0);
+            changeVolume(prevVolume);
         } else if (toggleState === 'on'){
             setPrevVolume(volCache);
+            changeVolume(prevVolume);
         }
     };
+    
     return (
         <>
             <Typography
