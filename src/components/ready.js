@@ -6,14 +6,22 @@ import {
     Slider,
     Typography
 } from '@material-ui/core';
-
+import Muted from '@material-ui/icons/VolumeMute';
+import NotMuted from '@material-ui/icons/VolumeUp';
 const start = ()=>{
     Tone.start();
     Tone.Transport.start();
 };
 
-export default function Ready() {
+export default function Ready({volume, changeVolume}) {
     const [isPlaying,setIsPlaying] = useState(false);
+    const [prevVolume, setPrevVolume]=useState(false);
+    const handleChange = (e,val)=>{
+        if (val !== prevVolume){
+            setPrevVolume(val);
+            changeVolume(val);
+        }
+    }
     return (
         <>
             <Typography
@@ -36,7 +44,15 @@ export default function Ready() {
             >
                 Start Audio
             </Button>
-
+            <Slider
+                min={0}
+                max={1}
+                step={0.0001}
+                onChange = {(e, val)=>handleChange(e,val)}
+            />
+            {
+                (prevVolume) ? <NotMuted/> : <Muted/>
+            }
         </>
     )
 }
